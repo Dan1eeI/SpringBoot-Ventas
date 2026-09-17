@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Listado de Productos</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<main>
+    <header class="page-header">
+        <div>
+            <h1 th:text="${titulo}">Listado de Productos</h1>
+            <p>Consulta y actualiza el inventario disponible.</p>
+        </div>
+        <a class="button" th:href="@{/Producto/form}">Crear producto</a>
+    </header>
+
+    <section class="content-card">
+    <div class="table-wrapper">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Fecha de creacion</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="producto : ${productos}">
+            <td th:text="${producto.id}"></td>
+            <td th:text="${producto.nombre}"></td>
+            <td th:text="${producto.descripcion}"></td>
+            <td th:text="${producto.precio}"></td>
+            <td th:text="${producto.stock}"></td>
+            <td th:text="${#dates.format(producto.createAt, 'dd/MM/yyyy HH:mm')}"></td>
+            <td>
+                <div class="table-actions">
+                <a th:href="@{/Producto/form/} + ${producto.id}">Editar</a>
+                <a class="button-danger" th:href="@{/Producto/eliminar/} + ${producto.id}"
+                   onclick="return confirm('¿Seguro que deseas eliminar este producto?');">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    </div>
+    </section>
+</main>
+</body>
+</html>

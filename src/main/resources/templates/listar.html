@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Listado de Clientes</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<main>
+    <header class="page-header">
+        <div>
+            <h1 th:text="${titulo}">Listado de Clientes</h1>
+            <p>Administra la información de tus clientes.</p>
+        </div>
+        <a class="button" th:href="@{/Cliente/form}">Crear cliente</a>
+    </header>
+
+    <section class="content-card">
+    <div class="table-wrapper">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Fecha de creacion</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}"></td>
+            <td th:text="${cliente.nombre}"></td>
+            <td th:text="${cliente.apellido}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td th:text="${#dates.format(cliente.createAt, 'dd/MM/yyyy HH:mm')}"></td>
+            <td>
+                <div class="table-actions">
+                <a th:href="@{/Cliente/form/} + ${cliente.id}">Editar</a>
+                <a class="button-danger" th:href="@{/Cliente/eliminar/} + ${cliente.id}"
+                   onclick="return confirm('¿Seguro que deseas eliminar este cliente?');">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+package com.clase2.taller2.Modelos.DAO;
+
+import java.util.List;
+
+import com.clase2.taller2.Modelos.Entity.Cliente;
+
+// Esta interfaz define los metodos que se van a utilizar para la interacción con la base de datos
+public interface ClienteDAO_Interface {
+
+    public List<Cliente> findAll();
+
+    public void save(Cliente cliente);
+
+    public Cliente findOne(Long id);
+
+    public void delete(Long id);
+
+}
