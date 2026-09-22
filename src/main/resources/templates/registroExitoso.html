@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Registro exitoso</title>
+</head>
+<body>
+    <h1 th:text="${titulo}">Registro exitoso</h1>
+    <p>Tu cuenta fue creada correctamente. Debe ser aprobada por un administrador antes de que puedas iniciar sesion.</p>
+    <a th:href="@{/login}">Ir a iniciar sesion</a>
+</body>
+</html>

@@ -16,10 +16,14 @@ import com.clase2.taller2.Modelos.Entity.Cliente;
 
 @Controller
 @RequestMapping("/Cliente")
+@SuppressWarnings ("all")
 public class ClienteController {
 
-    @Autowired
-    private ClienteDAO_Interface clienteDAO;
+    private final ClienteDAO_Interface clienteDAO;
+
+    ClienteController(ClienteDAO_Interface clienteDAO) {
+        this.clienteDAO = clienteDAO;
+    }
 
     @GetMapping("/listar")
     public String listar(Model model) {
