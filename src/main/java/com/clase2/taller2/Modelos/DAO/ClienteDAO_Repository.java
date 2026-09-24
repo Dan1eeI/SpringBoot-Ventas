@@ -10,6 +10,9 @@ import com.clase2.taller2.Modelos.Entity.Cliente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
+
 // Esta clase sirve para la persistencia de datos y la interacción con la base de datos
 @Repository
 public class ClienteDAO_Repository implements ClienteDAO_Interface {
@@ -48,4 +51,17 @@ public class ClienteDAO_Repository implements ClienteDAO_Interface {
             em.remove(cliente);
         }
     }
+
+@Transactional(readOnly = true)
+@Override
+public Cliente findByEmail(String email) {
+    try {
+        TypedQuery<Cliente> query = em.createQuery(
+            "from Cliente where Email = :email", Cliente.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    } catch (NoResultException e) {
+        return null;
+    }
+}
 }

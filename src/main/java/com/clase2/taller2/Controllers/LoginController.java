@@ -11,19 +11,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.clase2.taller2.Modelos.DAO.ClienteDAO_Interface;
 import com.clase2.taller2.Modelos.DAO.LoginDAO_Interface;
+import com.clase2.taller2.Modelos.Entity.Cliente;
 import com.clase2.taller2.Modelos.Entity.Login;
 import com.clase2.taller2.Modelos.Enums.EstadoLogin;
 import com.clase2.taller2.Modelos.Enums.Rol;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
-    
+
     @Autowired
     private LoginDAO_Interface loginDAO;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ClienteDAO_Interface clienteDAO;
 
     @GetMapping("/registro")
     public String mostrarRegistro(Model model) {
@@ -109,4 +116,52 @@ public class LoginController {
         }
         return "redirect:/Login/listar";
     }
+
+@GetMapping("/login")
+public String mostrarLogin(Model model) {
+    model.addAttribute("titulo", "Iniciar sesion");
+    return "login";
+}
+
+@PostMapping("/login")
+public String procesarLogin(@RequestParam String correo, @RequestParam String contrasena,
+                             Model model, HttpSession session) {
+
+    Login login = loginDAO.findByCorreo(correo);
+
+    if (login == null || !passwordEncoder.matches(contrasena, login.getContrasena())) {
+        model.addAttribute("error", "Correo o contrasena incorrectos.");
+        model.addAttribute("titulo", "Iniciar sesion");
+        return "login";
+    }
+
+    if (login.getEstado() != EstadoLogin.ACTIVO) {
+        model.addAttribute("error", "Tu cuenta aun no ha sido aprobada por un administrador.");
+        model.addAttribute("titulo", "Iniciar sesion");
+        return "login";
+    }
+
+    session.setAttribute("idLogin", login.getId());
+    session.setAttribute("correo", login.getCorreo());
+    session.setAttribute("rol", login.getRol());
+
+    if (login.getRol() == Rol.ADMIN) {
+        return "redirect:/Producto/listar";
+    }
+
+    Cliente cliente = clienteDAO.findByEmail(login.getCorreo());
+        if (cliente != null) {
+         session.setAttribute("idCliente", cliente.getId());
+        return "redirect:/Cliente/listar";
+        } else {
+        session.setAttribute("idCliente", null);
+    return "redirect:/Cliente/form";
+    }
+}
+
+@GetMapping("/logout")
+public String logout(HttpSession session) {
+    session.invalidate();
+    return "redirect:/login";
+}
 }
