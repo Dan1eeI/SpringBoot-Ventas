@@ -69,9 +69,4 @@ public class LoginDAO_Repository implements LoginDAO_Interface {
             em.remove(login);
         }
     }
-
-    @Override
-    public Login FindByCorreo(String correo) {
-        return findByCorreo(correo);
-    }
 }

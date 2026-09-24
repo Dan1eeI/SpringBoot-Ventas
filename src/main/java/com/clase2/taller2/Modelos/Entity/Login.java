@@ -12,30 +12,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
-@Entity 
-@Table (name = "login")
-
+@Entity
+@Table(name = "login")
 public class Login {
-    
-    @SuppressWarnings ("all")
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String correo;
 
-    @Column (unique = true, nullable = false)
+    @Column(nullable = false)
     private String contrasena;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Rol rol;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private EstadoLogin estado;
 
-    @SuppressWarnings ("all")
     public Login() {
         this.rol = null;
         this.estado = null;
@@ -44,40 +40,31 @@ public class Login {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getCorreo() {
         return correo;
     }
-
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
     public String getContrasena() {
         return contrasena;
     }
-
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
     public Rol getRol() {
         return rol;
     }
-
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
     public EstadoLogin getEstado() {
         return estado;
     }
-
-    public void setEstado(EstadoLogin pendiente) {
-        this.estado = pendiente;
+    public void setEstado(EstadoLogin estado) {
+        this.estado = estado;
     }
 }

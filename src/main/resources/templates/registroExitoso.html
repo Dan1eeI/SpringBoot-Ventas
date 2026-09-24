@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${titulo}">Registro exitoso</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}">
 </head>
 <body>
-    <h1 th:text="${titulo}">Registro exitoso</h1>
-    <p>Tu cuenta fue creada correctamente. Debe ser aprobada por un administrador antes de que puedas iniciar sesion.</p>
-    <a th:href="@{/login}">Ir a iniciar sesion</a>
+<main>
+    <section class="content-card">
+        <h1 th:text="${titulo}">Registro exitoso</h1>
+        <p>Tu cuenta fue creada correctamente. Debe ser aprobada por un administrador antes de que puedas iniciar sesion.</p>
+        <a class="button" th:href="@{/login}">Ir a iniciar sesion</a>
+    </section>
+</main>
 </body>
 </html>

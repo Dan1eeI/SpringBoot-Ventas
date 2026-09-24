@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Gestion de usuarios</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<main>
+    <header class="page-header">
+    <h1 th:text="${titulo}">Gestion de usuarios</h1>
+    </header>
+
+    <section class="content-card">
+    <div class="table-wrapper">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Correo</th>
+            <th>Estado</th>
+            <th>Rol actual</th>
+            <th>Cambiar rol</th>
+        </tr>
+        <tr th:each="login : ${logins}">
+            <td th:text="${login.id}"></td>
+            <td th:text="${login.correo}"></td>
+            <td th:text="${login.estado}"></td>
+            <td th:text="${login.rol}"></td>
+            <td>
+                <form class="table-form" th:action="@{/Login/cambiarRol/} + ${login.id}" method="post">
+                    <select name="rol">
+                        <option value="CLIENTE" th:selected="${login.rol != null and login.rol.name() == 'CLIENTE'}">Cliente</option>
+                        <option value="ADMIN" th:selected="${login.rol != null and login.rol.name() == 'ADMIN'}">Admin</option>
+                    </select>
+                    <button type="submit">Guardar</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </div>
+    </section>
+</main>
+</body>
+</html>

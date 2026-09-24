@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Cuentas pendientes</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<main>
+    <header class="page-header">
+    <h1 th:text="${titulo}">Cuentas pendientes de aprobacion</h1>
+    </header>
+
+    <section class="content-card">
+    <div class="table-wrapper">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Correo</th>
+            <th>Asignar rol</th>
+            <th>Accion</th>
+        </tr>
+        <tr th:each="login : ${logins}">
+            <td th:text="${login.id}"></td>
+            <td th:text="${login.correo}"></td>
+            <td>
+                <form class="table-form" th:action="@{/Login/activar/} + ${login.id}" method="post">
+                    <select name="rol">
+                        <option value="CLIENTE">Cliente</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                    <button type="submit">Activar</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+    <p class="message" th:if="${#lists.isEmpty(logins)}">No hay cuentas pendientes por aprobar.</p>
+    </section>
+</main>
+</body>
+</html>

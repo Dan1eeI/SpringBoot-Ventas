@@ -1,14 +1,15 @@
 :root {
-	--color-primary: #2563eb;
-	--color-primary-dark: #1d4ed8;
-	--color-text: #172033;
-	--color-muted: #64748b;
-	--color-border: #e2e8f0;
-	--color-surface: #ffffff;
-	--color-background: #f8fafc;
-	--color-danger: #dc2626;
-	--radius: 14px;
-	--shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+	--color-primary: #c85c4d;
+	--color-primary-dark: #a8423d;
+	--color-text: #f4e9e3;
+	--color-muted: #c5aaa6;
+	--color-border: #4b303d;
+	--color-surface: #251b29;
+	--color-surface-alt: #302031;
+	--color-background: #160f19;
+	--color-danger: #ed8b76;
+	--color-focus: rgba(200, 92, 77, 0.25);
+	--radius: 8px;
 }
 
 * {
@@ -20,8 +21,8 @@ body {
 	min-height: 100vh;
 	padding: 32px 20px;
 	color: var(--color-text);
-	background: var(--color-background);
-	font-family: "Segoe UI", Tahoma, sans-serif;
+	background: radial-gradient(circle at top right, #382034 0, var(--color-background) 42%), var(--color-background);
+	font-family: Georgia, "Times New Roman", serif;
 	line-height: 1.5;
 }
 
@@ -41,6 +42,7 @@ main {
 .page-header h1 {
 	margin: 0;
 	color: var(--color-text);
+	font-weight: 600;
 	font-size: clamp(1.7rem, 4vw, 2.25rem);
 	line-height: 1.15;
 }
@@ -56,7 +58,6 @@ form {
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius);
 	background: var(--color-surface);
-	box-shadow: var(--shadow);
 }
 
 .table-wrapper {
@@ -81,8 +82,8 @@ td {
 }
 
 th {
-	color: #475569;
-	background: #f1f5f9;
+	color: #e2b7a7;
+	background: var(--color-surface-alt);
 	font-size: 0.78rem;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
@@ -93,7 +94,7 @@ tbody tr:last-child td {
 }
 
 tbody tr:hover {
-	background: #f8fbff;
+	background: #2d202f;
 }
 
 a {
@@ -104,7 +105,7 @@ a {
 
 a:hover {
 	color: var(--color-primary-dark);
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .button,
@@ -122,7 +123,6 @@ button {
 	font: inherit;
 	font-weight: 700;
 	text-decoration: none;
-	transition: background 160ms ease, transform 160ms ease;
 }
 
 .button:hover,
@@ -130,17 +130,16 @@ button:hover {
 	color: #ffffff;
 	background: var(--color-primary-dark);
 	text-decoration: none;
-	transform: translateY(-1px);
 }
 
 .button-secondary {
-	color: #475569;
-	background: #e2e8f0;
+	color: var(--color-text);
+	background: #493044;
 }
 
 .button-secondary:hover {
-	color: #1e293b;
-	background: #cbd5e1;
+	color: var(--color-text);
+	background: #5a394e;
 }
 
 .button-danger {
@@ -172,24 +171,48 @@ form {
 label {
 	display: block;
 	margin-bottom: 7px;
-	color: #334155;
+	color: #e2b7a7;
 	font-weight: 700;
 }
 
-input {
+input,
+select {
 	width: 100%;
 	min-height: 44px;
 	padding: 10px 12px;
-	border: 1px solid #cbd5e1;
+	border: 1px solid var(--color-border);
 	border-radius: 9px;
 	color: var(--color-text);
-	background: #ffffff;
+	background: #1b141e;
 	font: inherit;
 }
 
-input:focus {
+input:focus,
+select:focus {
 	border-color: var(--color-primary);
-	outline: 3px solid rgba(37, 99, 235, 0.16);
+	outline: 3px solid var(--color-focus);
+}
+
+.table-form {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+}
+
+.table-form select {
+	min-width: 130px;
+}
+
+.message {
+	padding: 14px 16px;
+	border-left: 3px solid var(--color-primary);
+	color: var(--color-muted);
+	background: var(--color-surface);
 }
 
 @media (max-width: 640px) {

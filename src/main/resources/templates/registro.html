@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${titulo}">Registro</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}">
 </head>
 <body>
-    <h1 th:text="${titulo}">Registro de nuevo usuario</h1>
+<main>
+    <header class="page-header">
+        <h1 th:text="${titulo}">Registro de nuevo usuario</h1>
+    </header>
 
-    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+    <p class="message" th:if="${error}" th:text="${error}"></p>
 
     <form th:action="@{/registro}" th:object="${login}" method="post">
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" th:field="*{correo}" required /><br><br>
+        <div class="form-group">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" th:field="*{correo}" required />
+        </div>
 
-        <label for="contrasena">Contrasena:</label>
-        <input type="password" id="contrasena" th:field="*{contrasena}" required /><br><br>
+        <div class="form-group">
+            <label for="contrasena">Contrasena</label>
+            <input type="password" id="contrasena" th:field="*{contrasena}" required />
+        </div>
 
-        <button type="submit">Registrarme</button>
-        <a th:href="@{/login}">Ya tengo cuenta</a>
+        <div class="actions">
+            <button type="submit">Registrarme</button>
+            <a class="button button-secondary" th:href="@{/login}">Ya tengo cuenta</a>
+        </div>
     </form>
+</main>
 </body>
 </html>
